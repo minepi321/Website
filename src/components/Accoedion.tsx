@@ -7,25 +7,27 @@ import {
 import Link from "next/link"
   
   export function AccordionDemo() {
+    const BASE_URL = 'https://minepi.com'
     const data = [
         {
             header: 'Pi Blockchain',
             children: [
                 {
                     text: 'Pi Node',
-                    href: '',
+                    href: `${BASE_URL}/pi-blockchain/pi-node/`
                 },
                 {
                     text: 'Pi BlockExplorer',
-                    href: '',
+                    href: `https://blockexplorer.minepi.com`
+                }
+                ,
+                {
+                    text: 'Pi WhitePaper',
+                    href: `${BASE_URL}/white-paper/`
                 },
                 {
-                    text: 'Pi Whitepaper',
-                    href: '',
-                },
-                {
-                    text: 'Roadmap',
-                    href: '',
+                    text: 'RoadMap',
+                    href: `${BASE_URL}/roadmap`
                 }
             ]
         },
@@ -34,28 +36,28 @@ import Link from "next/link"
             children: [
                 {
                     text: 'New Developers',
-                    href: '',
+                    href: `${BASE_URL}/developers/`
                 },
                 {
-                    text: 'Why BUild on Pi?',
-                    href: '',
+                    text: 'Why Build on Pi',
+                    href: `${BASE_URL}/developers/why-build-on-pi/`
                 },
                 {
                     text: 'Pi Hackathon',
-                    href: '',
+                    href: `${BASE_URL}/developers/pi-hackathon/`
                 },
                 {
-                    text: 'KYB Veified Businesses',
-                    href: '',
+                    text: 'KYB Verified Businesses',
+                    href: `${BASE_URL}/kyb-business-pi/`
                 },
                 {
                     text: 'KYB Your Business',
-                    href: ''
+                    href: `${BASE_URL}/kyb-businesss-pi/`
                 },
                 {
-                    text: 'Partner with Pi',
-                    href: ''
-                },
+                    text: 'Partner With Pi',
+                    href: `${BASE_URL}/partners/`
+                }
             ],
             
         },
@@ -67,16 +69,16 @@ import Link from "next/link"
             children: [
                 {
                     text: 'Blog',
-                    href: '',
+                    href: `${BASE_URL}/blog`
                 },
                 {
                     text: 'Media Outreach',
-                    href: '',
+                    href: `${BASE_URL}/newsroom`
                 },
                 {
                     text: 'Safety Center',
-                    href: '',
-                },
+                    href: `${BASE_URL}/safety`
+                }
             ]
         },
         {
@@ -89,7 +91,12 @@ import Link from "next/link"
             data.map((accordiondata, index) => (
                 <AccordionItem key={crypto.randomUUID()} className="border-b-0" value={`item-${index}`}>
                     <AccordionTrigger display={!!accordiondata.children} className="text-[20px] justify-normal transist">
-                        {accordiondata.header}
+                        {accordiondata.children ? accordiondata.header : 
+                        <Link 
+                            href={`${accordiondata.header === 'About Us' ? 'https://minepi.com/about/' : 'https://minepi.com/support/'} `}
+                        >
+                            {accordiondata.header}
+                        </Link> }
                     </AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-5 ml-6">
                         {accordiondata.children && (
