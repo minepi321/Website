@@ -95,7 +95,7 @@ const Form = () => {
       ></textarea>
       <button
         type="submit"
-        className="mt-5 font-bold py-4 px-8 rounded-[10px] mb-10"
+        className="mt-5 font-bold py-4 px-8 rounded-[10px] mb-10 hover:bg-[#c4940e] hover:!border-[#c4940e] hover:!text-white"
         style={{
           color: "rgb(112, 61, 146)",
           border: "1px solid rgb(112, 61, 146)",
