@@ -9,30 +9,61 @@ import { AccordionDemo } from "../Accoedion";
 
 interface LinksTypeType {
     text: string,
-    children? : string[]
+    children? : {text: string, url: string}[]
 }
 
 type LinksType = LinksTypeType[] 
-
+const BASE_URL = 'https://minepi.com'
 const Links: LinksType = [
     {
         text: 'Pi Blockchain',
         children: [
-            'Pi Node',
-            'Pi BlockExplorer',
-            'Pi WhitePaper',
-            'RoadMap'
+            {
+                text: 'Pi Node',
+                url: `${BASE_URL}/pi-blockchain/pi-node/`
+            },
+            {
+                text: 'Pi BlockExplorer',
+                url: `https://blockexplorer.minepi.com`
+            }
+            ,
+            {
+                text: 'Pi WhitePaper',
+                url: `${BASE_URL}/white-paper/`
+            },
+            {
+                text: 'RoadMap',
+                url: `${BASE_URL}/roadmap`
+            }
         ]
     },
     {
         text: 'Developers',
         children: [
-            'New Developers',
-            'Why Build on Pi',
-            'Pi Hackathon',
-            'KYB Verified Businesses',
-            'KYB Your Business',
-            'Partner With Pi'
+            {
+                text: 'New Developers',
+                url: `${BASE_URL}/developers/`
+            },
+            {
+                text: 'Why Build on Pi',
+                url: `${BASE_URL}/developers/why-build-on-pi/`
+            },
+            {
+                text: 'Pi Hackathon',
+                url: `${BASE_URL}/developers/pi-hackathon/`
+            },
+            {
+                text: 'KYB Verified Businesses',
+                url: `${BASE_URL}/kyb-business-pi/`
+            },
+            {
+                text: 'KYB Your Business',
+                url: `${BASE_URL}/kyb-businesss-pi/`
+            },
+            {
+                text: 'Partner With Pi',
+                url: `${BASE_URL}/partners/`
+            }
         ]
     },
     {
@@ -41,9 +72,18 @@ const Links: LinksType = [
     {
         text: 'Community',
         children: [
-            'Blog',
-            'Media Outreach',
-            'Safety Center'
+            {
+                text: 'Blog',
+                url: `${BASE_URL}/blog`
+            },
+            {
+                text: 'Media Outreach',
+                url: `${BASE_URL}/newsroom`
+            },
+            {
+                text: 'Safety Center',
+                url: `${BASE_URL}/safety`
+            }
         ]
     },
     {
@@ -53,16 +93,21 @@ const Links: LinksType = [
 
 const Images = [
     {
-        icon: <Twitter />
+        icon: <Twitter />,
+        url: 'https://twitter.com/PiCoreTeam'
+
     },
     {
-        icon: <Facebook />
+        icon: <Facebook />,
+        url: 'https://www.facebook.com/PiCoreTeam/'
     },
     {
-        icon: <Youtube />
+        icon: <Youtube />,
+        url: 'https://www.youtube.com/c/PiCoreTeam',
     },
     {
-        icon: <Instagram />
+        icon: <Instagram />,
+        url: 'https://www.instagram.com/pi_network/'
     }
 ]
 
@@ -104,11 +149,12 @@ const Header = () => {
                                     texts={<ul className="flex flex-col gap-3 ">
                                         {item.children?.map(child => (
                                         <Link 
+                                            target="_blank"
                                             key={crypto.randomUUID()}
                                             className="relative z-10 no-underline text-black translate-underline-second" 
-                                            href=""
+                                            href={child.url}
                                             >
-                                            <h5>{child}</h5>
+                                                {child.text}
                                         </Link>
                                     ))}
                                 </ul>}
@@ -116,7 +162,7 @@ const Header = () => {
                             (
                             <Link 
                                 className="relative no-underline text-[#fff] flex items-center translate-underline" 
-                                href=""
+                                href={`${item.text === 'About Us' ? 'https://minepi.com/about/' : 'https://minepi.com/support/'} `}
                                 >
                                 {item.text}
                                 {
@@ -131,13 +177,15 @@ const Header = () => {
 
             <ul className="flex items-center gap-5">
                 {
-                    Images.map(({icon}) => (
+                    Images.map(({icon, url}) => (
                         <div 
                             key={crypto.randomUUID()}
                             className="text-white icons"
                             role="button"
                         >
-                            {icon}
+                            <Link href={url}>
+                                {icon}
+                            </Link>
                         </div>
                     ))
                 }
@@ -175,8 +223,9 @@ const Header = () => {
                     {Images.map(
                         img => 
                         <Link 
-                            href={''} 
+                            href={img.url} 
                             key={crypto.randomUUID()}
+                        
                             >
                                 {img.icon}
                             </Link>
